@@ -1,0 +1,25 @@
+# System files
+.DS_Store
+Thumbs.db
+*~
+*.swp
+*.swo
+
+# IDE settings
+.vscode/
+.idea/
+.claude/
+.github/
+
+# Harmonize specific
+*.log
+/state.env
+/last_backup_dir
+
+# Testing & Temporary
+/tmp/
+/tests/tmp/
+
+# Backups created by the script during testing
+backup-*/
+uninstall-*/

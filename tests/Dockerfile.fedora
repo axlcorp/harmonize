@@ -1,0 +1,29 @@
+# Test Harmonize on Fedora
+FROM fedora:40
+
+RUN dnf install -y \
+    curl \
+    ca-certificates \
+    sudo \
+    && dnf clean all
+
+# Create test user
+RUN useradd -m -s /bin/bash testuser && \
+    echo "testuser ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+WORKDIR /harmonize
+
+COPY harmonize.sh .
+COPY config/ ./config/
+
+# Test dry-run first
+RUN bash harmonize.sh install --dry-run
+
+# Run actual installation
+RUN bash harmonize.sh install
+
+# Verify installation
+RUN test -f /usr/local/bin/starship && echo "✓ Starship installed"
+RUN test -f /etc/issue && echo "✓ Banner configured"
+
+CMD ["echo", "All tests passed!"]

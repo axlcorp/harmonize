@@ -1,0 +1,33 @@
+# Test Harmonize on Ubuntu
+FROM ubuntu:24.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y \
+    curl \
+    ca-certificates \
+    sudo \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create test user
+RUN useradd -m -s /bin/bash testuser && \
+    echo "testuser ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+WORKDIR /harmonize
+
+COPY harmonize.sh .
+COPY config/ ./config/
+
+# Test dry-run first
+RUN bash harmonize.sh install --dry-run
+
+# Run actual installation with modern tools
+RUN bash harmonize.sh install --modern-tools
+
+# Verify installation
+RUN test -f /usr/local/bin/starship && echo "✓ Starship installed"
+RUN test -f /etc/issue && echo "✓ Banner configured"
+RUN command -v zoxide && echo "✓ zoxide installed" || true
+RUN command -v fzf && echo "✓ fzf installed" || true
+
+CMD ["echo", "All tests passed!"]

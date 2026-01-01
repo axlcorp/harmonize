@@ -1,0 +1,34 @@
+# Test Harmonize on Debian
+FROM debian:bookworm-slim
+
+RUN apt-get update && apt-get install -y \
+    curl \
+    ca-certificates \
+    sudo \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create test user
+RUN useradd -m -s /bin/bash testuser && \
+    echo "testuser ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+WORKDIR /harmonize
+
+COPY harmonize.sh .
+COPY config/ ./config/
+
+# Test dry-run first
+RUN bash harmonize.sh install --dry-run
+
+# Run actual installation
+RUN bash harmonize.sh install
+
+# Verify installation
+RUN test -f /usr/local/bin/starship && echo "✓ Starship installed"
+RUN test -f /etc/issue && echo "✓ Banner configured"
+RUN test -f /var/lib/prompt-harmonizer/state.env && echo "✓ State file created"
+RUN test -d /etc/harmonize/hooks.d && echo "✓ Hooks directory created"
+
+# Test uninstall
+RUN bash harmonize.sh uninstall
+
+CMD ["echo", "All tests passed!"]

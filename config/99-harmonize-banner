@@ -1,0 +1,21 @@
+#!/bin/bash
+# Dynamic MOTD Banner for Prompt Harmonizer
+# This will be installed to /etc/update-motd.d/99-harmonize-banner
+
+# Path to the banner generator script
+BANNER_SCRIPT="/usr/local/bin/harmonize-banner"
+
+if [[ -x "$BANNER_SCRIPT" ]]; then
+  "$BANNER_SCRIPT"
+else
+  # Fallback if script not found
+  cat <<'EOF'
+
+╔═══════════════════════════════════════════════════════════════════════╗
+║                                                                       ║
+║   Welcome to Harmonized System                                       ║
+║                                                                       ║
+╚═══════════════════════════════════════════════════════════════════════╝
+
+EOF
+fi

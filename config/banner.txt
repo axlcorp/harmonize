@@ -1,0 +1,10 @@
+
+╔═══════════════════════════════════════════════════════════╗
+║                                                           ║
+║   Welcome to Harmonized System                           ║
+║                                                           ║
+║   All activities are logged and monitored                ║
+║   Unauthorized access is strictly prohibited             ║
+║                                                           ║
+╚═══════════════════════════════════════════════════════════╝
+

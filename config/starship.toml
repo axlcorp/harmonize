@@ -1,0 +1,83 @@
+# Starship Configuration for Prompt Harmonizer
+# Supports ROLE / SSH / CT / DOCKER / K8S badges
+
+format = """
+[┌─](bold green)\
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_status\
+$env_var\
+$line_break\
+[└─](bold green)\
+$character"""
+
+# Username
+[username]
+style_user = "bold yellow"
+style_root = "bold red"
+format = "[$user]($style) "
+disabled = false
+show_always = true
+
+# Hostname
+[hostname]
+ssh_only = false
+format = "[@$hostname]($style) "
+style = "bold blue"
+disabled = false
+
+# Directory
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+format = "[$path]($style)[$read_only]($read_only_style) "
+style = "bold cyan"
+
+# Git Branch
+[git_branch]
+format = "[$symbol$branch]($style) "
+symbol = " "
+style = "bold purple"
+
+# Git Status
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style) )'
+style = "bold red"
+
+# Character (prompt symbol)
+[character]
+success_symbol = "[➜](bold green)"
+error_symbol = "[✗](bold red)"
+
+# Environment Variables for Badges
+# ROLE badge
+[env_var.ROLE]
+variable = "ROLE"
+format = "[[ROLE:$env_value](bold yellow)] "
+disabled = false
+
+# SSH badge
+[env_var.SSH]
+variable = "SSH_CONNECTION"
+format = "[[SSH](bold green)] "
+disabled = false
+
+# Container badge
+[env_var.CT]
+variable = "IN_CONTAINER"
+format = "[[CT](bold magenta)] "
+disabled = false
+
+# Docker context badge
+[env_var.DOCKER]
+variable = "DOCKER_CONTEXT"
+format = "[[DOCKER:$env_value](bold blue)] "
+disabled = false
+
+# Kubernetes context badge
+[env_var.K8S]
+variable = "K8S_CONTEXT"
+format = "[[K8S:$env_value](bold cyan)] "
+disabled = false
