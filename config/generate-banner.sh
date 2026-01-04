@@ -113,14 +113,14 @@ generate_banner() {
 
   echo ""
   printf "    ${C_CYAN}🖥${C_RESET}   OS:          ${C_RESET}%s${C_RESET}\n" "${os_info}"
-  printf "    ${C_CYAN}🏠${C_RESET}   Hostname:    ${C_BOLD}%s${C_RESET}\n" "${hostname}"
-  printf "    ${C_CYAN}💡${C_RESET}   IP Address:  ${C_RESET}%s${C_RESET}\n" "${ip_addr}"
+  printf "    ${C_CYAN}🏠${C_RESET}  Hostname:    ${C_BOLD}%s${C_RESET}\n" "${hostname}"
+  printf "    ${C_CYAN}💡${C_RESET}  IP Address:  ${C_RESET}%s${C_RESET}\n" "${ip_addr}"
   printf "    ${C_CYAN}🏷${C_RESET}   Role:        ${C_YELLOW}%s${C_RESET}\n" "${role}"
   echo ""
   printf "    ${C_MAGENTA}⏱${C_RESET}   Uptime:      ${C_RESET}%s${C_RESET}\n" "${uptime}"
-  printf "    ${C_MAGENTA}📊${C_RESET}   Load:        ${C_RESET}%s${C_RESET}\n" "${load}"
-  printf "    ${C_MAGENTA}💾${C_RESET}   Memory:      ${C_RESET}%s${C_RESET}\n" "${memory}"
-  printf "    ${C_MAGENTA}💽${C_RESET}   Disk /:      ${C_RESET}%s${C_RESET}\n" "${disk}"
+  printf "    ${C_MAGENTA}📊${C_RESET}  Load:        ${C_RESET}%s${C_RESET}\n" "${load}"
+  printf "    ${C_MAGENTA}💾${C_RESET}  Memory:      ${C_RESET}%s${C_RESET}\n" "${memory}"
+  printf "    ${C_MAGENTA}💽${C_RESET}  Disk /:      ${C_RESET}%s${C_RESET}\n" "${disk}"
   echo ""
 }
 
