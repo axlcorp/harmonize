@@ -177,22 +177,22 @@ log() {
 }
 
 # ------- Pretty Output Functions -------
-# Colors
-C_RESET='\033[0m'
-C_BOLD='\033[1m'
-C_DIM='\033[2m'
-C_RED='\033[0;31m'
-C_GREEN='\033[0;32m'
-C_YELLOW='\033[0;33m'
-C_BLUE='\033[0;34m'
-C_MAGENTA='\033[0;35m'
-C_CYAN='\033[0;36m'
-C_WHITE='\033[0;37m'
-C_BOLD_GREEN='\033[1;32m'
-C_BOLD_BLUE='\033[1;34m'
-C_BOLD_YELLOW='\033[1;33m'
-C_BOLD_RED='\033[1;31m'
-C_BOLD_CYAN='\033[1;36m'
+# Colors (using $'...' for proper ANSI escape interpretation)
+C_RESET=$'\033[0m'
+C_BOLD=$'\033[1m'
+C_DIM=$'\033[2m'
+C_RED=$'\033[0;31m'
+C_GREEN=$'\033[0;32m'
+C_YELLOW=$'\033[0;33m'
+C_BLUE=$'\033[0;34m'
+C_MAGENTA=$'\033[0;35m'
+C_CYAN=$'\033[0;36m'
+C_WHITE=$'\033[0;37m'
+C_BOLD_GREEN=$'\033[1;32m'
+C_BOLD_BLUE=$'\033[1;34m'
+C_BOLD_YELLOW=$'\033[1;33m'
+C_BOLD_RED=$'\033[1;31m'
+C_BOLD_CYAN=$'\033[1;36m'
 
 # Check if terminal supports colors
 if [[ ! -t 1 ]]; then
