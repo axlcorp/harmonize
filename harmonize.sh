@@ -74,7 +74,8 @@ USE_DYNAMIC_BANNER="${USE_DYNAMIC_BANNER:-1}"     # Use dynamic MOTD script?
 # Optional external config support:
 # If set, script will try to download banner.txt and starship.toml from this URL base.
 # Default: Uses the official axlcorp/harmonize repository
-CONFIG_URL_BASE="${CONFIG_URL_BASE:-https://raw.githubusercontent.com/axlcorp/harmonize/refs/heads/main/config}"
+# Set to empty string to disable: CONFIG_URL_BASE=""
+: "${CONFIG_URL_BASE=https://raw.githubusercontent.com/axlcorp/harmonize/refs/heads/main/config}"
 
 # ------- Internationalization (i18n) -------
 init_messages() {
