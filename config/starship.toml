@@ -1,93 +1,71 @@
-# Starship Configuration for Prompt Harmonizer
-# Supports ROLE / SSH / CT / DOCKER / K8S badges
+# ~/.config/starship.toml
+add_newline = true
 
-format = """
-[┌─](bold green)\
-$username\
-$hostname\
-$custom\
-$directory\
-$git_branch\
-$git_status\
-$line_break\
-[└─](bold green)\
+format = """$username$hostname$custom$directory$git_branch$git_status$cmd_duration
 $character"""
 
-# Username
 [username]
-style_user = "bold yellow"
-style_root = "bold red"
-format = "[$user]($style) "
-disabled = false
 show_always = true
+format = "[$user]($style) "
+style_user = "bold cyan"
+style_root = "bold red"
 
-# Hostname
 [hostname]
 ssh_only = false
-format = "[@$hostname]($style) "
-style = "bold blue"
-disabled = false
+format = "on [$hostname]($style) "
+style = "bold yellow"
 
-# Directory
-[directory]
-truncation_length = 3
-truncate_to_repo = true
-format = "[$path]($style)[$read_only]($read_only_style) "
-style = "bold cyan"
-
-# Git Branch
-[git_branch]
-format = "[$symbol$branch]($style) "
-symbol = " "
-style = "bold purple"
-
-# Git Status
-[git_status]
-format = '([\[$all_status$ahead_behind\]]($style) )'
-style = "bold red"
-
-# Character (prompt symbol)
-[character]
-success_symbol = "[➜](bold green)"
-error_symbol = "[✗](bold red)"
-
-# --- Context Badges (custom modules) ---
-# ROLE badge
+# --- Context Badges (custom.*) ---
 [custom.role]
 when = """ test -n "$ROLE_NAME" """
-style = "bold yellow"
+style = "bold white"
 format = "[ROLE:$output]($style) "
-command = 'printf "%s" "$ROLE_NAME"'
-disabled = false
+command = "printf \"%s\" \"$ROLE_NAME\""
 
-# SSH badge
 [custom.ssh]
 when = """ test -n "$SSH_CONNECTION" """
-style = "bold green"
+style = "bold blue"
 format = "[SSH]($style) "
 command = "printf SSH"
-disabled = false
 
-# Container badge
 [custom.container]
 when = """ test -n "$IN_CONTAINER" """
 style = "bold magenta"
 format = "[CT]($style) "
 command = "printf CT"
-disabled = false
 
-# Docker context badge
 [custom.docker]
 when = """ command -v docker >/dev/null 2>&1 && docker context show >/dev/null 2>&1 """
-style = "bold blue"
+style = "bold cyan"
 format = "[DOCKER:$output]($style) "
 command = "docker context show 2>/dev/null | head -n1"
-disabled = false
 
-# Kubernetes context badge
 [custom.k8s]
 when = """ command -v kubectl >/dev/null 2>&1 && kubectl config current-context >/dev/null 2>&1 """
-style = "bold cyan"
+style = "bold green"
 format = "[K8S:$output]($style) "
 command = "kubectl config current-context 2>/dev/null | head -n1"
-disabled = false
+
+[directory]
+truncation_length = 4
+truncate_to_repo = true
+format = "in [$path]($style) "
+style = "bold green"
+
+[git_branch]
+format = "[$symbol$branch]($style) "
+symbol = " "
+style = "bold purple"
+
+[git_status]
+format = "[$all_status$ahead_behind]($style) "
+style = "bold purple"
+
+[cmd_duration]
+min_time = 500
+format = "took [$duration]($style) "
+style = "bold white"
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
