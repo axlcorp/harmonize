@@ -25,8 +25,26 @@ LOG_FILE="/var/log/prompt-harmonizer.log"
 PROMPT_MODE_DEFAULT="starship"
 
 # BANNER_TEXT_DEFAULT: The text displayed in /etc/issue and /etc/issue.net
-# Default is a security warning.
-BANNER_TEXT_DEFAULT=$'Authorized access only.\nAll activity may be monitored and reported.\n'
+# Matches config/banner.txt for consistency (with or without internet)
+BANNER_TEXT_DEFAULT=$'
+
+             __ __       _         _
+            |  \\  \\ _ _ | |   ___ | |_
+            |     || | || |_ [_] || . \\
+            |_|_|_| \\  ||___|[___||___/
+                    [__/                  01/2026
+
+╔═══════════════════════════════════════════════════════════╗
+║                                                           ║
+║        All activities are logged and monitored            ║
+║        Unauthorized access is strictly prohibited         ║
+║                                                           ║
+╚═══════════════════════════════════════════════════════════╝
+.
+
+
+
+'
 
 # Starship config with badges:
 # Defines the look and feel of the Starship prompt.
