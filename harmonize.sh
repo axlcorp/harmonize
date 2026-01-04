@@ -73,7 +73,8 @@ USE_DYNAMIC_BANNER="${USE_DYNAMIC_BANNER:-1}"     # Use dynamic MOTD script?
 
 # Optional external config support:
 # If set, script will try to download banner.txt and starship.toml from this URL base.
-CONFIG_URL_BASE="${CONFIG_URL_BASE:-}"
+# Default: Uses the official axlcorp/harmonize repository
+CONFIG_URL_BASE="${CONFIG_URL_BASE:-https://raw.githubusercontent.com/axlcorp/harmonize/refs/heads/main/config}"
 
 # ------- Internationalization (i18n) -------
 init_messages() {
@@ -1621,10 +1622,19 @@ ROLE badge:
 
 Optional external config:
   CONFIG_URL_BASE="https://raw.githubusercontent.com/<you>/<repo>/main/config"
-  - Loads: banner.txt and starship.toml if present
+  - Default: https://raw.githubusercontent.com/axlcorp/harmonize/refs/heads/main/config
+  - Loads: banner.txt, starship.toml, and generate-banner.sh if present
+  - Set to empty string to disable: CONFIG_URL_BASE=""
 
 One-liners:
-  sudo bash -c "\$(curl -fsSL https://raw.githubusercontent.com/<you>/<repo>/main/harmonize.sh)" -- install
+  # With default config (axlcorp/harmonize):
+  curl -fsSL https://raw.githubusercontent.com/axlcorp/harmonize/main/harmonize.sh | sudo bash -s -- install
+
+  # With custom config:
+  curl -fsSL https://raw.githubusercontent.com/axlcorp/harmonize/main/harmonize.sh | sudo CONFIG_URL_BASE="https://your-url" bash -s -- install
+
+  # Disable external config:
+  curl -fsSL https://raw.githubusercontent.com/axlcorp/harmonize/main/harmonize.sh | sudo CONFIG_URL_BASE="" bash -s -- install
 EOF
 }
 
