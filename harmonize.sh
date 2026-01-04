@@ -1121,7 +1121,7 @@ maybe_load_external_config() {
     BANNER_TEXT="$(cat /tmp/ph_banner.txt)"
     log "✓ Loaded banner.txt from CONFIG_URL_BASE"
     rm -f /tmp/ph_banner.txt
-    ((config_loaded++))
+    config_loaded=$((config_loaded + 1))
   else
     log "Could not load banner.txt (using default)"
   fi
@@ -1131,7 +1131,7 @@ maybe_load_external_config() {
     STARSHIP_TOML="$(cat /tmp/ph_starship.toml)"
     log "✓ Loaded starship.toml from CONFIG_URL_BASE"
     rm -f /tmp/ph_starship.toml
-    ((config_loaded++))
+    config_loaded=$((config_loaded + 1))
   else
     log "Could not load starship.toml (using default)"
   fi
@@ -1144,7 +1144,7 @@ maybe_load_external_config() {
         # Will be used by install_dynamic_banner
         export CUSTOM_BANNER_GENERATOR="$(cat /tmp/ph_generate_banner.sh)"
         log "✓ Loaded generate-banner.sh from CONFIG_URL_BASE"
-        ((config_loaded++))
+        config_loaded=$((config_loaded + 1))
       else
         log "WARNING: generate-banner.sh from URL is not a valid bash script"
       fi
