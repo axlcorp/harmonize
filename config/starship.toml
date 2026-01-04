@@ -5,10 +5,10 @@ format = """
 [┌─](bold green)\
 $username\
 $hostname\
+$custom\
 $directory\
 $git_branch\
 $git_status\
-$env_var\
 $line_break\
 [└─](bold green)\
 $character"""
@@ -51,33 +51,43 @@ style = "bold red"
 success_symbol = "[➜](bold green)"
 error_symbol = "[✗](bold red)"
 
-# Environment Variables for Badges
+# --- Context Badges (custom modules) ---
 # ROLE badge
-[env_var.ROLE]
-variable = "ROLE"
-format = "[[ROLE:$env_value](bold yellow)] "
+[custom.role]
+when = """ test -n "$ROLE_NAME" """
+style = "bold yellow"
+format = "[ROLE:$output]($style) "
+command = 'printf "%s" "$ROLE_NAME"'
 disabled = false
 
 # SSH badge
-[env_var.SSH]
-variable = "SSH_CONNECTION"
-format = "[[SSH](bold green)] "
+[custom.ssh]
+when = """ test -n "$SSH_CONNECTION" """
+style = "bold green"
+format = "[SSH]($style) "
+command = "printf SSH"
 disabled = false
 
 # Container badge
-[env_var.CT]
-variable = "IN_CONTAINER"
-format = "[[CT](bold magenta)] "
+[custom.container]
+when = """ test -n "$IN_CONTAINER" """
+style = "bold magenta"
+format = "[CT]($style) "
+command = "printf CT"
 disabled = false
 
 # Docker context badge
-[env_var.DOCKER]
-variable = "DOCKER_CONTEXT"
-format = "[[DOCKER:$env_value](bold blue)] "
+[custom.docker]
+when = """ command -v docker >/dev/null 2>&1 && docker context show >/dev/null 2>&1 """
+style = "bold blue"
+format = "[DOCKER:$output]($style) "
+command = "docker context show 2>/dev/null | head -n1"
 disabled = false
 
 # Kubernetes context badge
-[env_var.K8S]
-variable = "K8S_CONTEXT"
-format = "[[K8S:$env_value](bold cyan)] "
+[custom.k8s]
+when = """ command -v kubectl >/dev/null 2>&1 && kubectl config current-context >/dev/null 2>&1 """
+style = "bold cyan"
+format = "[K8S:$output]($style) "
+command = "kubectl config current-context 2>/dev/null | head -n1"
 disabled = false
